@@ -1,0 +1,33 @@
+sweet-tooth-catering/
+│
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+│
+├── backend/
+│   └── sweettooth-app/
+│       ├── src/main/java/com/sweettooth/catering/
+│       │   ├── SweetToothApplication.java
+│       │   ├── controller/
+│       │   │   └── ApiController.java
+│       │   ├── entity/
+│       │   │   ├── Order.java
+│       │   │   └── ContactMessage.java
+│       │   ├── repository/
+│       │   │   ├── OrderRepository.java
+│       │   │   └── ContactRepository.java
+│       │   ├── service/
+│       │   │   └── CateringService.java
+│       │   └── config/
+│       │       └── SecurityConfig.java
+│       │
+│       ├── src/main/resources/
+│       │   └── application.properties
+│       │
+│       └── pom.xml (or build.gradle for Gradle)
+│
+├── database/
+│   └── sweettooth_schema.sql
+│
+└── README.md
