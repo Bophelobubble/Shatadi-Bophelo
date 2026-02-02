@@ -1,0 +1,143 @@
+// Form submission handlers
+document.addEventListener('DOMContentLoaded', function() {
+    // Order Form Submission
+    const orderForm = document.getElementById('order-form');
+    if (orderForm) {
+        orderForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const orderData = {
+                name: document.getElementById('order-name').value,
+                phone: document.getElementById('order-phone').value,
+                email: document.getElementById('order-email').value,
+                items: document.getElementById('order-items').value,
+                date: document.getElementById('order-date').value,
+                type: document.getElementById('order-type').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // For now, log to console and show success message
+                // In production, replace with actual API call
+                console.log('Order submitted:', orderData);
+                
+                // Simulate API call
+                await submitToBackend('order', orderData);
+                
+                // Show success message
+                showMessage('order-response', 'Order submitted successfully! We will contact you shortly.', 'success');
+                
+                // Reset form
+                orderForm.reset();
+                
+            } catch (error) {
+                showMessage('order-response', 'Error submitting order. Please try again.', 'error');
+                console.error('Order submission error:', error);
+            }
+        });
+    }
+    
+    // Contact Form Submission
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const contactData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                console.log('Contact form submitted:', contactData);
+                
+                // Simulate API call
+                await submitToBackend('contact', contactData);
+                
+                showMessage('contact-response', 'Message sent successfully! We\'ll get back to you soon.', 'success');
+                
+                contactForm.reset();
+                
+            } catch (error) {
+                showMessage('contact-response', 'Error sending message. Please try again.', 'error');
+                console.error('Contact form error:', error);
+            }
+        });
+    }
+    
+    // Admin Login
+    const adminForm = document.getElementById('admin-login');
+    if (adminForm) {
+        adminForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Admin functionality would be implemented in production
+            alert('Admin login would be implemented with secure backend authentication');
+        });
+    }
+});
+
+// Helper function to show messages
+function showMessage(elementId, message, type) {
+    const element = document.getElementById(elementId);
+    element.textContent = message;
+    element.className = `response-message ${type}`;
+    element.style.display = 'block';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 5000);
+}
+
+// Simulate backend submission
+async function submitToBackend(endpoint, data) {
+    // In production, replace with actual fetch to Java backend
+    // Example:
+    /*
+    const response = await fetch(`http://localhost:8080/api/${endpoint}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    
+    return response.json();
+    */
+    
+    // For demo purposes, simulate network delay
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve({ success: true, message: 'Submission successful' });
+        }, 1000);
+    });
+}
+
+// Navigation helper
+function scrollToOrder() {
+    document.getElementById('orders').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+}
+
+// Simple form validation
+function validateForm(formData) {
+    const errors = [];
+    
+    if (!formData.name || formData.name.trim().length < 2) {
+        errors.push('Name must be at least 2 characters long');
+    }
+    
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        errors.push('Please enter a valid email address');
+    }
+    
+    return errors;
+}
