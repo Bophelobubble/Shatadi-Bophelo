@@ -1,0 +1,4 @@
+cd backend/sweettooth-app
+mvn spring-boot:run
+# or
+./gradlew bootRun
