@@ -1,0 +1,78 @@
+package com.sweettooth.catering.controller;
+
+import com.sweettooth.catering.entity.Order;
+import com.sweettooth.catering.entity.ContactMessage;
+import com.sweettooth.catering.repository.OrderRepository;
+import com.sweettooth.catering.repository.ContactRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "*")
+public class ApiController {
+    
+    @Autowired
+    private OrderRepository orderRepository;
+    
+    @Autowired
+    private ContactRepository contactRepository;
+    
+    @PostMapping("/order")
+    public ResponseEntity<Map<String, String>> createOrder(@RequestBody Order order) {
+        try {
+            order.setCreatedAt(LocalDateTime.now());
+            orderRepository.save(order);
+            
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Order received successfully!");
+            response.put("status", "success");
+            response.put("orderId", order.getId().toString());
+            
+            // In production, you might want to send an email confirmation here
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error processing order: " + e.getMessage());
+            errorResponse.put("status", "error");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    @PostMapping("/contact")
+    public ResponseEntity<Map<String, String>> createContact(@RequestBody ContactMessage contact) {
+        try {
+            contact.setCreatedAt(LocalDateTime.now());
+            contact.setResponded(false);
+            contactRepository.save(contact);
+            
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Message received successfully! We'll contact you soon.");
+            response.put("status", "success");
+            response.put("contactId", contact.getId().toString());
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error processing message: " + e.getMessage());
+            errorResponse.put("status", "error");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    @GetMapping("/orders")
+    public ResponseEntity<?> getAllOrders() {
+        return ResponseEntity.ok(orderRepository.findAll());
+    }
+    
+    @GetMapping("/contacts")
+    public ResponseEntity<?> getAllContacts() {
+        return ResponseEntity.ok(contactRepository.findAll());
+    }
+}
