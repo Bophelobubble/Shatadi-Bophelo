@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Tooth - Snack and Catering Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>Sweet Tooth</h1>
+            <p class="tagline">A fully black female-owned company</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#orders">Order Online</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#admin">Admin Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h2>Nutritious & Delicious Food</h2>
+            <p>Providing tasty snacks and professional catering for every occasion</p>
+            <button onclick="scrollToOrder()">Order Now</button>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <p>Sweet Tooth is a fully black female-owned company prided in providing nutritious and delicious food as well as tasty snacks for all your events and celebrations.</p>
+            <p>Founded with passion and commitment to quality, we specialize in creating memorable culinary experiences.</p>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-categories">
+            <div class="category">
+                <h3>Snacks & Treats</h3>
+                <ul>
+                    <li>Chocolates and Candies</li>
+                    <li>Fresh Popcorn</li>
+                    <li>Ice Cream</li>
+                    <li>Slushies</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Meals & Catering</h3>
+                <ul>
+                    <li>Fresh Sandwiches</li>
+                    <li>Combo Meals</li>
+                    <li>Custom Catering Packages</li>
+                    <li>Event Platters</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="orders">
+        <h2>Place Your Order</h2>
+        <form id="order-form">
+            <div class="form-group">
+                <label for="order-name">Full Name:</label>
+                <input type="text" id="order-name" name="order-name" required>
+            </div>
+            <div class="form-group">
+                <label for="order-phone">Phone:</label>
+                <input type="tel" id="order-phone" name="order-phone" required>
+            </div>
+            <div class="form-group">
+                <label for="order-email">Email:</label>
+                <input type="email" id="order-email" name="order-email" required>
+            </div>
+            <div class="form-group">
+                <label for="order-items">Items Requested:</label>
+                <textarea id="order-items" name="order-items" rows="4" required placeholder="Please list items and quantities..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="order-date">Preferred Date:</label>
+                <input type="date" id="order-date" name="order-date" required>
+            </div>
+            <div class="form-group">
+                <label for="order-type">Order Type:</label>
+                <select id="order-type" name="order-type">
+                    <option value="pickup">Pickup</option>
+                    <option value="delivery">Delivery</option>
+                    <option value="catering">Catering Event</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Submit Order</button>
+        </form>
+        <div id="order-response" class="response-message"></div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <p><strong>Email:</strong> sbsweettooth@gmail.com</p>
+            <p><strong>Phone:</strong> 079 537 1395</p>
+            <p><strong>Hours:</strong> Monday - Saturday: 8AM - 8PM</p>
+        </div>
+        
+        <h3>Send us a Message</h3>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div id="contact-response" class="response-message"></div>
+    </section>
+
+    <section id="admin" style="display: none;">
+        <h2>Admin Login</h2>
+        <form id="admin-login">
+            <div class="form-group">
+                <label for="admin-user">Username:</label>
+                <input type="text" id="admin-user" name="admin-user" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-pass">Password:</label>
+                <input type="password" id="admin-pass" name="admin-pass" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Sweet Tooth Catering Services. All rights reserved.</p>
+        <p>Empowering communities through delicious food</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
