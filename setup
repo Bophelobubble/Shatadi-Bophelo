@@ -1,0 +1,2 @@
+mysql -u root -p
+source database/sweettooth_schema.sql
