@@ -1,0 +1,66 @@
+-- Create Database
+CREATE DATABASE IF NOT EXISTS sweettooth_db;
+USE sweettooth_db;
+
+-- Orders Table
+CREATE TABLE IF NOT EXISTS orders (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    items TEXT NOT NULL,
+    preferred_date DATETIME NOT NULL,
+    order_type VARCHAR(50) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_email (email),
+    INDEX idx_created_at (created_at)
+);
+
+-- Contacts Table
+CREATE TABLE IF NOT EXISTS contacts (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(200) NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    responded BOOLEAN DEFAULT FALSE,
+    INDEX idx_email (email),
+    INDEX idx_responded (responded)
+);
+
+-- Menu Items Table (for future expansion)
+CREATE TABLE IF NOT EXISTS menu_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    category VARCHAR(50) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    available BOOLEAN DEFAULT TRUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_category (category),
+    INDEX idx_available (available)
+);
+
+-- Insert Sample Menu Items
+INSERT INTO menu_items (name, description, category, price) VALUES
+('Chocolate Box', 'Assorted premium chocolates', 'Snacks', 149.99),
+('Popcorn Large', 'Freshly popped with butter', 'Snacks', 49.99),
+('Gourmet Sandwich', 'Fresh bread with premium fillings', 'Meals', 89.99),
+('Ice Cream Sundae', 'Vanilla ice cream with toppings', 'Desserts', 39.99),
+('Catering Package', 'Custom catering for events', 'Catering', 2999.99);
+
+-- Users Table (for admin login)
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    role VARCHAR(20) DEFAULT 'USER',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_username (username)
+);
+
+-- Insert Admin User (password: admin123 - in production, use proper hashing)
+INSERT INTO users (username, password_hash, email, role) VALUES
+('admin', '$2a$10$YourHashedPasswordHere', 'sbsweettooth@gmail.com', 'ADMIN');
